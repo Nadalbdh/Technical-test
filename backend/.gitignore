@@ -1,0 +1,25 @@
+# Django
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+
+# SQLite database files
+db.sqlite3
+
+# Log files
+logs/
+*.log
+
+# Local settings
+local_settings.py
+
+# Compiled Python files
+*.pyc
+
+# Ignore all migrations, except __init__.py
+/user_managem/migrations/*
+!/user_managem/migrations/__init__.py
