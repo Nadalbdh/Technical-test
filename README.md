@@ -15,5 +15,3 @@ This demo project is for a technical test, utilizing Python/Django for the backe
     2. Install dependencies: `npm install`.
     3. Start the React development server: `npm start`.
 
-## Final Notes
-If I had more time, the next step would be to dockerize the project. However, I choose to push it now without Docker to respect **the one-day work limit**. I'm currently in midterms week, that's why i'm pushing this code so late 😢. However I'll get around to dockerizing it on the weekend, let me know if that's something you'd be interested in seeing. Feel free to explore the project, I look forward to your feedback.
