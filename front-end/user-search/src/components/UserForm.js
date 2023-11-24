@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import { useUserContext } from '../context/UserContext'; 
+import axiosInstance from '../utils/axiosInstance';
 
 function UserForm({ setUsers = () => {} }) {
   const navigate = useNavigate();
@@ -9,10 +10,11 @@ function UserForm({ setUsers = () => {} }) {
   const [lastName, setLastName] = useState('');
   const [age, setAge] = useState('');
   const [hometown, setHometown] = useState('');
+  const { state } = useUserContext();
 
   useEffect(() => {
     if (id) {
-      axios.get(`http://localhost:8000/api/profiles/${id}/`).then((response) => {
+      axiosInstance.get(`/profiles/${id}/`).then((response) => {
         setFirstName(response.data.first_name);
         setLastName(response.data.last_name);
         setAge(response.data.age);
@@ -31,14 +33,13 @@ function UserForm({ setUsers = () => {} }) {
     try {
       let response;
       if (id) {
-        response = await axios.patch(`http://localhost:8000/api/profiles/${id}/`, formData);
+        response = await axiosInstance.patch(`/profiles/${id}/`, formData);
         setUsers((prevUsers) =>
           prevUsers.map((user) => (user.id === response.data.id ? response.data : user))
         );
         alert(`User updated successfully!`, navigate(`/profiles/${response.data.id}`));
-
       } else {
-        response = await axios.post('http://localhost:8000/api/profiles/', formData);
+        response = await axiosInstance.post('/profiles/', formData);
         setUsers((prevUsers) => [response.data, ...prevUsers]);
         alert('User created successfully!', navigate('/'));
       }
@@ -50,7 +51,6 @@ function UserForm({ setUsers = () => {} }) {
       console.error(error);
     }
   };
-
 
   return (
     <div className="container mx-auto px-4">
@@ -74,14 +74,14 @@ function UserForm({ setUsers = () => {} }) {
             Last Name
           </label>
           <input
+            type="text"
             name="lastName"
             id="lastName"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
-            rows="5"
             className="border border-gray-400 rounded w-full px-3 py-2 mt-1 text-gray-900"
-          ></input>
+          />
         </div>
         <div className="mb-4">
           <label htmlFor="age" className="block font-medium text-gray-700">
@@ -122,7 +122,6 @@ function UserForm({ setUsers = () => {} }) {
       </form>
     </div>
   );
-
 }
 
 export default UserForm;

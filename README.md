@@ -1,9 +1,11 @@
 # User Management Project
 
 ## Introduction
+
 This demo project is for a technical test, utilizing Python/Django for the backend and React for the frontend.
 
 ## Features
+
 - **Backend:**
     1. Navigate to the `backend` directory: `cd user_management/backend`.
     2. Install dependencies: `pip install -r requirements.txt`.

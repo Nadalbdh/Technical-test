@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import UserForm from "./UserForm";
 
 function UserDetail() {
@@ -9,15 +9,15 @@ function UserDetail() {
   const [editing, setEditing] = useState(false);
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/profiles/${id}/`).then((response) => {
+    axiosInstance.get(`/profiles/${id}/`).then((response) => {
       setUser(response.data);
     });
   }, [id]);
 
   const handleUpdate = async (formData) => {
     try {
-      const response = await axios.patch(
-        `http://localhost:8000/api/profiles/${id}/`,
+      const response = await axiosInstance.patch(
+        `/profiles/${id}/`,
         formData
       );
       setUser(response.data);
